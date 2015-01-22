@@ -13,8 +13,9 @@
         
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfbWr8FgN2JgQIDC6go0BfffsrbBZN5Rg&sensor=true"></script> 
         
+        
     </head>
-    <body onload="initialize()">
+    <body>
         
         <?php 
         require $template
@@ -22,6 +23,7 @@
     
        
     <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     
     </body>
 </html>
