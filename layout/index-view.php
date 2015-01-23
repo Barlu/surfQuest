@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
         <link rel="stylesheet" href="css/style.css"/>
         
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfbWr8FgN2JgQIDC6go0BfffsrbBZN5Rg&sensor=true"></script> 
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfbWr8FgN2JgQIDC6go0BfffsrbBZN5Rg&sensor=true&libraries=geometry"></script> 
         
         
     </head>
