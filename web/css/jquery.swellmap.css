@@ -1,0 +1,188 @@
+﻿/*
+ * SwellMap plugin example style
+*/
+
+.smap-plugin {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 240px;
+    height: 200px;
+    position: relative;
+    margin: 0 auto;
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    text-align: left;
+}
+
+.smap-plugin a, .smap-plugin a:link, .smap-plugin a:visited {
+  color: #2763A5;
+  text-decoration: none;
+}
+
+.smap-plugin a:hover, a:focus {
+  color: #6191C5;
+}
+
+
+.smap-plugin .smap-content {
+    position: absolute;
+    top: 60px;
+    left: 0px;
+    width: 240px;
+    height: 114px;
+    color: #fff;
+    border: 1px solid #c1d4f0;
+   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    background-image: url("../images/plugin-bg.png");
+    background-repeat: repeat-x;
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    padding: 4px;
+    z-index: 0;
+    background-color: #3967cc;
+}
+
+.smap-plugin link {
+    color: #888;
+}
+
+.smap-plugin .title {
+    position: absolute;
+    top: 4px;
+    left: 0px;
+    font-size: 26px;
+    color: #666;
+    
+    width: 240px;
+    height: 40px;
+    
+    text-shadow: 1px 1px 0 #fff;
+    background-image: url("../images/header-grey.png");
+    background-repeat: repeat-x;
+    background-color: #ddd;
+    
+   border: 1px solid #c1d4f0;
+   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    
+    border-radius: 6px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    padding: 4px;
+    z-index: 0;
+}
+
+
+.smap-plugin .smap-link {
+    position: absolute;
+    top: 108px;
+    left: 4px;
+    font-size: 10px;
+}
+
+.smap-plugin .smap-link a {
+    color: #6191C5;
+}
+
+.smap-plugin .smap-link a:hover {
+    color: #ddd;
+}
+
+.smap-plugin .smap-fdate {
+    position: absolute;
+    top: 38px;
+    left: 6px;
+    font-size: 12px;
+    font-style: italic;
+    color: #aaa;
+}
+
+.smap-plugin .smap-rating {
+    position: absolute;
+    top: 34px;
+    right: 44px;
+    z-index: 1000;
+}
+
+.smap-plugin .smap-summary {
+    position: absolute;
+    top: 34px;
+    right: 0px;
+    z-index: 1000;
+}
+
+.smap-plugin .smap-wface, .smap-plugin .smap-bhs, .smap-plugin .smap-hs_sw,
+.smap-plugin .smap-bhssw, .smap-plugin .smap-tp, .smap-plugin .smap-dpm,
+.smap-plugin .smap-windma, .smap-plugin .smap-wind, .smap-plugin .smap-tmp2m, .smap-plugin .smap-apratesfc, .smap-plugin .smap-tcdcclm, .smap-plugin .smap-mslp,
+.smap-plugin .smap-vissfc, .smap-plugin .smap-rh2m {
+    position: absolute;
+    text-shadow: 0 -1px 1px #2d4e83;
+    font-weight: bold;
+}
+
+.smap-plugin .smap-hs, .smap-plugin .smap-hs_sw, .smap-plugin .smap-tp, .smap-plugin .smap-dpm, .smap-plugin .smap-windma {
+    font-size: 14px;
+}
+
+.smap-plugin .smap-wface, .smap-plugin .smap-bhs, .smap-plugin .smap-tmp2m {
+    font-size: 60px;
+    top: 0px;
+    left: 8px;
+}
+
+.smap-plugin .smap-hs_sw, .smap-plugin .smap-bhssw, .smap-plugin .smap-apratesfc {
+    top: 16px;
+    right: 8px;
+}
+
+.smap-plugin .smap-tp, .smap-plugin .smap-tcdcclm {
+    top: 32px;
+    right: 8px;
+}
+
+.smap-plugin .smap-dpm, .smap-plugin .smap-wind {
+    top: 48px;
+    right: 8px;
+}
+
+.smap-plugin .smap-windma, .smap-plugin .smap-mslp {
+    top: 64px;
+    right: 8px;
+}
+
+.smap-plugin .smap-vissfc {
+    top: 80px;
+    right: 8px;
+}
+
+.smap-plugin .smap-rh2m {
+    top: 96px;
+    right: 8px;
+}
+
+.smap-plugin .smap-tides {
+    position: absolute;
+    font-size: 11px;
+    top: 76px;
+    left: 4px;
+    padding: 4px;
+}
+
+.smap-plugin .smap-desc {
+    font-weight: normal;   
+}
+
+.smap-plugin .smap-wface .smap-desc, .smap-plugin .smap-bhs .smap-desc, .smap-plugin .smap-tmp2m .smap-desc {
+    position: absolute;
+    top: 56px;
+    left: 0px;
+    font-size: 20px;
+}
+
+
+
+
