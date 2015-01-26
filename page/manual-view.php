@@ -8,4 +8,15 @@
     </select>
 </div>
 <div id="map-canvas"></div>
+<div id='loadingWrapper'>
+    <div class="spinner centered">
+        <p>Finding beaches...</p>
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<script>mapModule.setMap();</script>
 

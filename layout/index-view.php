@@ -51,20 +51,20 @@
                     <ul>
                         <li>
                             <a href="index.php?page=home">
-                                <i class='fa fa-location-arrow'></i>
+                                <i class='fa fa-location-arrow <?php echo $locate;?>'></i>
                             </a>
                         </li>
                         <li>
                             <a href="index.php?page=manual">
-                                <i class="fa fa-search"></i>
+                                <i class="fa fa-search <?php echo $search;?>"></i>
                             </a>
                         </li>
                         <li>
-                            <i class="fa fa-star-o"></i>
+                            <i class="fa fa-star-o <?php echo $favorites;?>"></i>
                         </li>
                         <li>
 
-                            <i class="fa fa-question"></i>
+                            <i class="fa fa-question <?php echo $help;?>"></i>
 
                         </li>
                     </ul>

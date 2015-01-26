@@ -16,5 +16,9 @@
         <div class="rect5"></div>
     </div>
 </div>
+
+<script>
+    mapModule.runAutoLocate();
+</script>
 <!--<div id="directions-panel"></div>-->
 <!--<div id="forcast"></div>-->

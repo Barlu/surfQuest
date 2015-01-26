@@ -53,8 +53,8 @@ class Index {
         if ($this->hasTemplate($page)) {
             $run = true;
             $template = $this->getTemplate($page);
-//            No script required for layout
-//            require self::LAYOUT_DIRECTORY . 'index' . self::EXTENSION;
+
+            require self::LAYOUT_DIRECTORY . 'index' . self::EXTENSION;
             require self::LAYOUT_DIRECTORY . 'index-view' . self::EXTENSION;
         }
         if (!$run) {

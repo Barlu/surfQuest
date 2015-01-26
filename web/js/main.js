@@ -2,6 +2,7 @@
 //---------------------------------ELEMENT GENERATION
 //Create beach selector
 function generateElements() {
+    $('#loadingWrapper').hide();
     for (var beach in beaches) {
         $('.beachSelection').append('<option>' + beaches[beach].name + '</option>');
     }
@@ -68,22 +69,19 @@ function findWindowHeight() {
     return height;
 }
 
+
+
 //-------------------------------MAPS
 var storage = localStorage;
+
+if(!storage.getItem('returning')){
+    window.location = "index.php?page=help";
+    storage.setItem('returning', 'true');
+}
 //----------START CLOSURE
 // Closure created to contain semi-global variables relevant to MAPS functions
 var mapModule = (function () {
 
-    if (navigator.geolocation) {
-        var geoOptions = {
-            enableHighAccuracy: true
-        };
-
-        navigator.geolocation.getCurrentPosition(locateSuccess, locateFail, geoOptions);
-
-    } else {
-        alert('I\'m sorry, but Geolocation is not supported in your current browser.');
-    }
     var map;
     var userLatLng;
     var defaultZoom = 10;
@@ -231,6 +229,30 @@ var mapModule = (function () {
     //The two functions that need to be accessed publicly have been returned from the closure
     //as an object
     return {
+        runAutoLocate: function () {
+            if (navigator.geolocation) {
+                var geoOptions = {
+                    enableHighAccuracy: true
+                };
+
+                navigator.geolocation.getCurrentPosition(locateSuccess, locateFail, geoOptions);
+
+            } else {
+                alert('I\'m sorry, but Geolocation is not supported in your current browser.');
+            }
+        },
+        setMap: function (mapOptions) {
+            if (!mapOptions) {
+                var latLng = new google.maps.LatLng(-41.477078, 172.993614);
+                mapOptions = {
+                    center: latLng,
+                    zoom: 5
+                };
+            }
+            map = new google.maps.Map(document.getElementById('map-canvas'),
+                    mapOptions);
+            $('#loadingWrapper').hide();
+        },
         setLocation: function (name) {
             for (var i = 0; i < cities.length; i++) {
                 if (cities[i].city === name) {
@@ -246,16 +268,16 @@ var mapModule = (function () {
         },
         setBeach: function (name) {
             displayLoading();
-            for (var beach in beaches) {             
+            for (var beach in beaches) {
                 if (beaches[beach].name === name) {
                     var marker = new google.maps.Marker({
-                            position: {
-                                lat: beaches[beach].lat,
-                                lng: beaches[beach].lng
-                            },
-                            map: map,
-                            title: name
-                        });
+                        position: {
+                            lat: beaches[beach].lat,
+                            lng: beaches[beach].lng
+                        },
+                        map: map,
+                        title: name
+                    });
                     request = {
                         origin: userLatLng,
                         destination: marker.position,
@@ -268,9 +290,9 @@ var mapModule = (function () {
                         }
                     });
                     $('#loadingWrapper').hide();
-                    infoWindow.open(map, marker);                 
+                    infoWindow.open(map, marker);
                     setTimeout(fetchForcast, 500, name);
-                    
+
                 }
             }
         }};
@@ -347,7 +369,7 @@ var mapModule = (function () {
                             });
 
                             infoWindow.open(map, this);
-                            
+
                             setTimeout(fetchForcast, 500, beachName);
                         }
                         google.maps.event.addListener(marker, 'click', redefineDirections);
@@ -385,9 +407,9 @@ var mapModule = (function () {
             $(".loadingIcon").remove();
         }, 1000);
     }
-    
-    function displayLoading(){
-        
+
+    function displayLoading() {
+
         var height = findWindowHeight();
         $('#loadingWrapper').height(height);
         $('#loadingWrapper').show();
