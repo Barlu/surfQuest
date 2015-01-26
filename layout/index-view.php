@@ -20,13 +20,21 @@
 
     </head>
     <body>
+        <div id="wrapper">
+            <header>
+                <img id="banner">
+            </header>
+            <nav class="desktop">
 
-        <?php
-        require $template
-        ?>
+            </nav>
 
+            <?php
+            require $template
+            ?>
 
+            <nav class="handheld">
 
-
+            </nav>
+        </div>
     </body>
 </html>

@@ -1,49 +1,49 @@
 
 //---------------------------------UTILS
-(function () {
+(function() {
 
-    /**
-     * Decimal adjustment of a number.
-     *
-     * @param	{String}	type	The type of adjustment.
-     * @param	{Number}	value	The number.
-     * @param	{Integer}	exp		The exponent (the 10 logarithm of the adjustment base).
-     * @returns	{Number}			The adjusted value.
-     */
+//    /**
+//     * Decimal adjustment of a number.
+//     *
+//     * @param	{String}	type	The type of adjustment.
+//     * @param	{Number}	value	The number.
+//     * @param	{Integer}	exp		The exponent (the 10 logarithm of the adjustment base).
+//     * @returns	{Number}			The adjusted value.
+//     */
     function decimalAdjust(type, value, exp) {
-        // If the exp is undefined or zero...
+//         If the exp is undefined or zero...
         if (typeof exp === 'undefined' || +exp === 0) {
             return Math[type](value);
         }
         value = +value;
         exp = +exp;
-        // If the value is not a number or the exp is not an integer...
+//         If the value is not a number or the exp is not an integer...
         if (isNaN(value) || !(typeof exp === 'number' && exp % 1 === 0)) {
             return NaN;
         }
-        // Shift
+//         Shift
         value = value.toString().split('e');
         value = Math[type](+(value[0] + 'e' + (value[1] ? (+value[1] - exp) : -exp)));
-        // Shift back
+//         Shift back
         value = value.toString().split('e');
         return +(value[0] + 'e' + (value[1] ? (+value[1] + exp) : exp));
     }
 
-    // Decimal round
+//     Decimal round
     if (!Math.round10) {
-        Math.round10 = function (value, exp) {
+        Math.round10 = function(value, exp) {
             return decimalAdjust('round', value, exp);
         };
     }
-    // Decimal floor
+//     Decimal floor
     if (!Math.floor10) {
-        Math.floor10 = function (value, exp) {
+        Math.floor10 = function(value, exp) {
             return decimalAdjust('floor', value, exp);
         };
     }
-    // Decimal ceil
+//     Decimal ceil
     if (!Math.ceil10) {
-        Math.ceil10 = function (value, exp) {
+        Math.ceil10 = function(value, exp) {
             return decimalAdjust('ceil', value, exp);
         };
     }
@@ -57,9 +57,7 @@ if (navigator.geolocation) {
     var geoOptions = {
         enableHighAccuracy: true
     };
-
     navigator.geolocation.getCurrentPosition(locateSuccess, locateFail, geoOptions);
-
 } else {
     alert('I\'m sorry, but Geolocation is not supported in your current browser.');
 }
@@ -118,24 +116,38 @@ function activateSonar(map, position, defaultZoom) {
 
     //Sets max and min radius of the pulse, the speed/step and 
     //assigns the circle variable and default zoom
-    var rMax = 5000,
-            rMin = 1000,
+    var rMax = 4500,
+            rMin = 500,
             step = 20,
             lastZoom = defaultZoom;
     var sonar;
 
     //Adds listener to map so that when zoomed in or out the size
     //of the radius is change by a factor of 2
-    google.maps.event.addListener(map, 'zoom_changed', function () {
+    google.maps.event.addListener(map, 'zoom_changed', function() {
         var zoom = map.getZoom();
-        if (zoom > lastZoom) {
+        var diff = (zoom - lastZoom);
+
+        if (diff === 1) {
             rMax /= 2;
             rMin /= 2;
             step /= 2;
-        } else {
+        } else if (diff > 1) {
+            for (var i = 0; i < diff; i++) {
+                rMax /= 2;
+                rMin /= 2;
+                step /= 2;
+            }
+        } else if (diff === -1) {
             rMax *= 2;
             rMin *= 2;
             step *= 2;
+        } else if (diff < -1) {
+            for (var i = 0; i > diff; i--) {
+                rMax *= 2;
+                rMin *= 2;
+                step *= 2;
+            }
         }
         lastZoom = zoom;
     });
@@ -159,18 +171,23 @@ function activateSonar(map, position, defaultZoom) {
         });
 
         var opacity = 1;
-        var sonarAnimation = setInterval(function () {
+        var sonarAnimation = setInterval(function() {
             var radius = sonar.getRadius();
-
             if ((radius > rMax)) {
                 sonar.setMap(null);
                 animateSonar();
                 window.clearInterval(sonarAnimation);
             } else {
+                if (opacity <= 0.004) {
+                    sonar.setOptions({
+                        strokeOpacity: opacity
+                    });
+                } else {
+                    sonar.setOptions({
+                        strokeOpacity: opacity -= 0.006
+                    });
+                }
                 sonar.setRadius(radius + step);
-                sonar.setOptions({
-                    strokeOpacity: opacity -= 0.006
-                });
             }
         }, 10);
     }());
@@ -182,6 +199,7 @@ function getNearestBeaches(start, beaches, map) {
     var sortedBeaches = [];
     var beachName;
     var results = [];
+    var count = 0;
 
     for (var beach in beaches) {
         sortedBeaches.push({
@@ -189,8 +207,7 @@ function getNearestBeaches(start, beaches, map) {
             beach: beaches[beach]
         });
     }
-
-    sortedBeaches.sort(function (a, b) {
+    sortedBeaches.sort(function(a, b) {
         return a.distance - b.distance;
     });
     for (var i = 0; i < 10; i++) {
@@ -202,97 +219,92 @@ function getNearestBeaches(start, beaches, map) {
         };
 
 
-        obtainAndDisplay(request, i, function (results, count) {
-            if (count === 9) {
-                results.sort(compareDistanceGoogle);
-                for (var j = 4; j > -1; j--) {
-                    console.log(results[j]);
-                    if (j === 0) {
-                        directionsDisplay.setMap(map);
-                        directionsDisplay.setPanel(document.getElementById('directions-panel'));
-                        directionsDisplay.setOptions({suppressMarkers: true});
-                        directionsDisplay.setDirections(results[j].result);
+        obtainAndDisplay(request, i, function() {
 
-                        var infoWindow = new google.maps.InfoWindow({
-                            content: '<div id="infoWindow"><i class="loadingIcon fa fa-spinner fa-pulse fa-3x"></i></div>'
-                        });
-                    }
-                    var marker = new google.maps.Marker({
-                        position: {
-                            lat: results[j].result.ic.destination.k,
-                            lng: results[j].result.ic.destination.D
-                        },
-                        map: map,
-                        title: results[j].beach.name
+            results.sort(compareDistanceGoogle);
+            for (var j = 4; j > -1; j--) {
+                beachName = results[j].beach.name;
+                var marker = new google.maps.Marker({
+                    position: {
+                        lat: results[j].result.ic.destination.k,
+                        lng: results[j].result.ic.destination.D
+                    },
+                    map: map,
+                    title: beachName
+                });
+                console.log(j);
+                console.log(beachName);
+                if (j === 0) {
+                    directionsDisplay.setMap(map);
+                    directionsDisplay.setPanel(document.getElementById('directions-panel'));
+                    directionsDisplay.setOptions({suppressMarkers: true});
+                    directionsDisplay.setDirections(results[j].result);
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: '<div id="infoWindow"><i class="loadingIcon fa fa-spinner fa-pulse fa-3x"></i></div>'
                     });
-                    console.log(marker);
-                    if (infoWindow) {
-//                        Due to issues with the forcast API I needed to set a time out for
-//                        the forcast to be called. This allowed enough time for the html infoWindow to be rendered
-//                        then the swellmap to be placed inside.
-//                        I also needed to pass the beach name into a single variable as this
-//                        was unable to be accessed inside fethForcast() otherwise.
-                        beachName = results[j].beach.name;
-                        infoWindow.open(map, marker);
-                        setTimeout(fetchForcast, 50);
-                    }
-
-                    function redefineDirections() {
-                        
-                        for (var i = 0; i < results.length; i++) {
-                            console.log();
-                            console.log(results[i].beach.lng)
-                            console.log(i);
-                            if (results[i].beach.lng === Math.round10(this.position.D, -6) && results[i].beach.lat === Math.round10(this.position.k, -6)) {
-                                beachName = results[i].beach.name;
-                                console.log(beachName);
-                            }
-                        }
-                        request = {
-                            origin: start,
-                            destination: this.position,
-                            travelMode: google.maps.TravelMode.DRIVING
-                        };
-
-                        directionsService.route(request, function (result, status) {
-                            if (status === google.maps.DirectionsStatus.OK) {
-                                directionsDisplay.setDirections(result);
-                            }
-                        });
-
-                        infoWindow.open(map, this);
-                        setTimeout(fetchForcast, 50);
-                    }
-                    google.maps.event.addListener(marker, 'click', redefineDirections);
+                    infoWindow.open(map, marker);
+                    setTimeout(fetchForcast, 150);
                 }
+
+
+
+                function redefineDirections() {
+                    for (var i = 0; i < results.length; i++) {
+                        if (results[i].beach.lng === Math.round10(this.position.D, -6) && results[i].beach.lat === Math.round10(this.position.k, -6)) {
+                            beachName = results[i].beach.name;
+                        }
+                    }
+
+                    request = {
+                        origin: start,
+                        destination: this.position,
+                        travelMode: google.maps.TravelMode.DRIVING
+                    };
+
+                    directionsService.route(request, function(result, status) {
+                        if (status === google.maps.DirectionsStatus.OK) {
+                            directionsDisplay.setDirections(result);
+                        }
+                    });
+
+                    infoWindow.open(map, this);
+                    setTimeout(fetchForcast, 500);
+                }
+                google.maps.event.addListener(marker, 'click', redefineDirections);
             }
         });
-
-
     }
 
     function fetchForcast() {
-        console.log(beachName)
         $("#infoWindow").swellmap({
             site: beachName,
             activity: "Surfing",
             smaplink: false
         });
-        setTimeout(function(){
+        setTimeout(function() {
             $(".loadingIcon").remove();
-        }, 500);
+        }, 1000);
     }
 
 
-    function obtainAndDisplay(request, count, fn) {
-        directionsService.route(request, function (result, status) {
+    function obtainAndDisplay(request, beachNumber, fn) {
+        directionsService.route(request, function(result, status) {
+            console.log(status);
+            console.log(result);
             if (status === google.maps.DirectionsStatus.OK) {
 
                 results.push({
                     result: result,
-                    beach: sortedBeaches[count].beach
+                    beach: sortedBeaches[beachNumber].beach
                 });
-                fn(results, count);
+                console.log(results)
+            }
+            count++;
+            console.log(count);
+            if (count === 10) {
+                console.log('result next callback fired');
+                fn();
             }
         });
     }
@@ -317,7 +329,6 @@ function deg2rad(deg) {
 }
 
 function compareDistanceGoogle(a, b) {
-    console.log(a);
     return a.result.routes[0].legs[0].distance.value - b.result.routes[0].legs[0].distance.value;
 }
 
