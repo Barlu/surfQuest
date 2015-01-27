@@ -435,7 +435,7 @@ var beaches = {
         lng: 172.928415
     },
     rollingStones: {
-        name: 'Rolling Stones (Mahia Peninsula)',
+        name: 'Rolling Stones',
         spotId: 111,
         lat: -39.074372,
         lng: 177.818973

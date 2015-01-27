@@ -17,7 +17,7 @@
         <script type="text/javascript" src="js/data.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
 
-        
+
         <script type="text/javascript" src="js/jquery.swellmap.js"></script>
 
     </head>
@@ -30,25 +30,46 @@
                 <ul>
                     <li><a>Home</a></li>
                     <li>
-                        <select id='citySelection' onchange="mapModule.setLocation(this.options[this.selectedIndex].text)">
-                            <option>Select your nearest town/city...</option>
+                        <select class='navSelect citySelection' onchange="mapModule.setLocation(this.options[this.selectedIndex].text)">
+                            <option>Select nearest location...</option>
                         </select>
                     </li>
                     <li>
-                        <select id='beachSelection' onchange="mapModule.setBeach(this.options[this.selectedIndex].text)">
+                        <select class='navSelect beachSelection' onchange="mapModule.setBeach(this.options[this.selectedIndex].text)">
                             <option>Select a beach...</option>
                         </select>
                     </li>
                 </ul>
             </nav>
 
-            <?php
-            require $template
-            ?>
+            <div id="contentWrapper">
+                <?php
+                require $template
+                ?>
 
-            <nav class="handheld">
+                <nav class="handheld">
+                    <ul>
+                        <li>
+                            <a href="index.php?page=home">
+                                <i class='fa fa-location-arrow'></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.php?page=manual">
+                                <i class="fa fa-search"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <i class="fa fa-star-o"></i>
+                        </li>
+                        <li>
 
-            </nav>
+                            <i class="fa fa-question"></i>
+
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </body>
 </html>

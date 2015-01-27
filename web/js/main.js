@@ -3,10 +3,10 @@
 //Create beach selector
 function generateElements() {
     for (var beach in beaches) {
-        $('#beachSelection').append('<option>' + beaches[beach].name + '</option>');
+        $('.beachSelection').append('<option>' + beaches[beach].name + '</option>');
     }
     for (var i = 0; i < cities.length; i++) {
-        $('#citySelection').append('<option>' + cities[i].city + '</option>');
+        $('.citySelection').append('<option>' + cities[i].city + '</option>');
     }
 }
 ;
@@ -61,6 +61,13 @@ function generateElements() {
 
 })();
 
+function findWindowHeight() {
+    var body = document.body,
+            html = document.documentElement;
+    var height = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight);
+    return height;
+}
+
 //-------------------------------MAPS
 var storage = localStorage;
 //----------START CLOSURE
@@ -86,6 +93,7 @@ var mapModule = (function () {
     var infoWindow = new google.maps.InfoWindow({
         content: '<div id="infoWindow"><i class="loadingIcon fa fa-spinner fa-pulse fa-3x"></i></div>'
     });
+
     function locateSuccess(position) {
         userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -237,6 +245,7 @@ var mapModule = (function () {
             }
         },
         setBeach: function (name) {
+            displayLoading();
             for (var beach in beaches) {             
                 if (beaches[beach].name === name) {
                     var marker = new google.maps.Marker({
@@ -258,14 +267,16 @@ var mapModule = (function () {
                             directionsDisplay.setDirections(result);
                         }
                     });
-                    infoWindow.open(map, marker);
+                    $('#loadingWrapper').hide();
+                    infoWindow.open(map, marker);                 
                     setTimeout(fetchForcast, 500, name);
+                    
                 }
             }
         }};
 
     function getNearestBeaches(start, beaches, map) {
-
+        displayLoading();
         var sortedBeaches = [];
         var beachName;
         var results = [];
@@ -306,20 +317,15 @@ var mapModule = (function () {
                             map: map,
                             title: beachName
                         });
-                        console.log(j);
-                        console.log(beachName);
                         if (j === 0) {
                             directionsDisplay.setMap(map);
                             directionsDisplay.setPanel(document.getElementById('directions-panel'));
                             directionsDisplay.setOptions({suppressMarkers: true});
                             directionsDisplay.setDirections(results[j].result);
-
-
+                            $('#loadingWrapper').hide();
                             infoWindow.open(map, marker);
                             setTimeout(fetchForcast, 150, beachName);
                         }
-
-
 
                         function redefineDirections() {
                             for (var i = 0; i < results.length; i++) {
@@ -356,21 +362,13 @@ var mapModule = (function () {
 
         function obtainAndDisplay(request, i, fn) {
             directionsService.route(request, function (result, status) {
-                console.log(status);
-                console.log(result);
                 if (status === google.maps.DirectionsStatus.OK) {
-
                     results.push({
                         result: result,
                         beach: sortedBeaches[i].beach
                     });
-                    console.log(results);
                 }
-
-                console.log(i);
                 if (i === 9) {
-                    console.log('result next callback fired');
-
                     fn();
                 }
             });
@@ -387,9 +385,17 @@ var mapModule = (function () {
             $(".loadingIcon").remove();
         }, 1000);
     }
+    
+    function displayLoading(){
+        
+        var height = findWindowHeight();
+        $('#loadingWrapper').height(height);
+        $('#loadingWrapper').show();
+    }
 
 }());
 //--------END CLOSURE
+
 function getDistance(lat1, lon1, lat2, lon2) {
     var R = 6371; // Radius of the earth in km
     var dLat = deg2rad(lat2 - lat1);  // deg2rad below
