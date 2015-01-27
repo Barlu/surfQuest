@@ -28,7 +28,7 @@
             </header>
             <nav class="desktop">
                 <ul>
-                    <li><a>Home</a></li>
+                    <li><a href="index.php?page=home">Home</a></li>
                     <li>
                         <select class='navSelect citySelection' onchange="mapModule.setLocation(this.options[this.selectedIndex].text)">
                             <option>Select nearest location...</option>
@@ -38,6 +38,9 @@
                         <select class='navSelect beachSelection' onchange="mapModule.setBeach(this.options[this.selectedIndex].text)">
                             <option>Select a beach...</option>
                         </select>
+                    </li>
+                    <li id='favoritesLi'>
+
                     </li>
                 </ul>
             </nav>
@@ -51,21 +54,23 @@
                     <ul>
                         <li>
                             <a href="index.php?page=home">
-                                <i class='fa fa-location-arrow <?php echo $locate;?>'></i>
+                                <i class='fa fa-location-arrow <?php echo $locate; ?>'></i>
                             </a>
                         </li>
                         <li>
                             <a href="index.php?page=manual">
-                                <i class="fa fa-search <?php echo $search;?>"></i>
+                                <i class="fa fa-search <?php echo $search; ?>"></i>
                             </a>
                         </li>
                         <li>
-                            <i class="fa fa-star-o <?php echo $favorites;?>"></i>
+                            <a href="index.php?page=favorites">
+                                <i class="fa fa-star-o <?php echo $favorites; ?>"></i>
+                            </a>
                         </li>
                         <li>
-
-                            <i class="fa fa-question <?php echo $help;?>"></i>
-
+                            <a href="index.php?page=help">
+                                <i class="fa fa-question <?php echo $help; ?>"></i>
+                            </a>
                         </li>
                     </ul>
                 </nav>

@@ -8,28 +8,26 @@ and open the template in the editor.
     Author     : emmett.newman
 */
 @media screen {
-    body {
-        font-family:Lucida Sans, 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
-        color: #3f5765;
-
-    }
+    /*--------------------------------GENERAL*/
     a {
+        text-decoration: none;
         color: #3f5765;
     }
     a:visited {
         color: #3f5765;
     }
-    
-    .highlight {
-        color: #ff530d;
+
+    h1 {
+        margin-top: 5px;
+        margin-bottom: 20px;
+        padding-left: 5px;
+        display: inline-block;
     }
-    
-    .centered {
-        position: fixed;
-        z-index: 101;
-        top: 30%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+
+    body {
+        font-family:Lucida Sans, 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+        color: #3f5765;
+
     }
 
     div#wrapper {
@@ -40,10 +38,38 @@ and open the template in the editor.
         box-shadow: 1px 1px 16px 3px rgba(0,0,0,0.75);
     }
 
+    #contentWrapper {
+        background-image: -moz-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
+        background-image: -webkit-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
+        background-image: -ms-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
 
-    .navSelect {
-        border: none;
-        outline: none;
+    }
+
+    .highlight {
+        color: #ff530d;
+    }
+
+    .centered {
+        position: fixed;
+        z-index: 101;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    /*----------------------------------NAV*/
+    nav.desktop {
+        position: relative;
+        z-index: 98;
+    }
+
+    nav.handheld {
+        position: fixed;
+        z-index: 99;
+        width: 100%;
+        bottom: 0px;
+        left: 0px;
+
     }
 
     nav ul {
@@ -57,82 +83,33 @@ and open the template in the editor.
         -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
         -moz-box-shadow:    1px 1px 6px 0px rgba(50, 50, 50, 0.75);
         box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
-        
-    }
 
-    nav ul li{
-        display: inline-block;
-        padding-left: 20px;
-        padding-right: 20px;
-
-    }
-    
-    nav.desktop {
-        position: relative;
-        z-index: 98;
-    }
-    nav.handheld {
-        position: fixed;
-        z-index: 99;
-        width: 100%;
-        bottom: 0px;
-        left: 0px;
-
-    }
-
-    nav.handheld li {
-        padding-bottom: 1%;
-        padding-top: 1%;
-    }
-
-
-    .iconLink{
-        width: 60px;
-    }
-
-    #map-canvas {
-        height: 600px;
-        -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
-        -moz-box-shadow:    1px 1px 6px 0px rgba(50, 50, 50, 0.75);
-        box-shadow:         1px 1px 6px 0px rgba(50, 50, 50, 0.75);
-    }
-
-    #directions-panel {
-        height: 100%;
-        margin: auto;
-        width: 390px;
-        overflow: auto;
-    }
-    #infoWindow{
-        width: 250px;
-        height: 190px;
-    }
-
-    .loadingIcon {
-        position: relative;
-        top: 50%;
-        left: 50%;
-        transform: translateY(-50%);
-        transform: translateX(-50%);
-
-    }
-
-    img#banner {
-        width: 100%;
-        display: block;
-    }
-
-    #contentWrapper {
-        background-image: -moz-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
-        background-image: -webkit-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
-        background-image: -ms-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
-        
     }
 
     nav.handheld ul {
         background-color: rgba(255,255,255,.8);
         margin-top: 5px;
         margin-bottom: 5px;
+
+    }
+
+    nav ul li{
+        display: inline-block;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+
+
+    .navSelect {
+        border: none;
+        outline: none;
+    }
+
+    .citySelection {
+        display: inline-block;
+        padding: 2px;
+        margin: auto;
 
     }
 
@@ -146,14 +123,53 @@ and open the template in the editor.
         box-shadow: 1px 1px 16px 3px rgba(0,0,0,0.75);
     }
 
-    .citySelection {
-        display: inline-block;
-        padding: 2px;
+    .iconLink{
+        width: 60px;
+    }
+    /*-------------------------------------MAP*/
+    #map-canvas {
+        height: 600px;
+        -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        box-shadow:         1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+    }
+
+    #directions-panel {
+        height: 100%;
         margin: auto;
-        padding-left: 20px;
-        padding-right: 20px;
+        width: 390px;
+        overflow: auto;
+    }
+    #infoWindow {
+        width: 260px;
+        height: 190px;
+        line-height: 1.35;
+        overflow: hidden;
+    }
 
 
+    .loadingIcon {
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%);
+        transform: translateX(-50%);
+    }
+
+    .favorite {
+        position: absolute;
+        z-index: 98;
+        color: #FFD700;
+        right: 3px;
+        top: 36px;
+        text-shadow: 3px 3px 5px rgba(150, 150, 150, 1);
+        cursor: pointer;
+    }
+
+    /*------------------------------------BANNER*/
+    img#banner {
+        width: 100%;
+        display: block;
     }
 
     /*---------------------------------------LOADING ICON*/
@@ -219,9 +235,20 @@ and open the template in the editor.
         background-color: #efefef;
         z-index: 100;
     }
-
-
+    /*-----------------------------------------FAVORITES*/
+    .flexContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+    
+    .favoriteWrap {
+        width: 265px;
+        height: 190px;
+    }
 }
+
+
 
 @media (max-width: 375px){
     img#banner {
@@ -235,6 +262,9 @@ and open the template in the editor.
         padding-left: 5%;
         padding-right: 5%;
         font-size: 1.5em;
+    }
+    nav.handheld ul li:nth-child(2) {
+        font-size: 1.4em;
     }
 }
 
@@ -250,6 +280,9 @@ and open the template in the editor.
         padding-right: 6%;
         font-size: 2em;
     }
+    nav.handheld ul li:nth-child(2) {
+        font-size: 1.9em;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 800px){
@@ -264,6 +297,11 @@ and open the template in the editor.
         padding-right: 7%;
         font-size: 2.5em;
     }
+    nav.handheld ul li:nth-child(2) {
+        font-size: 2.3em;
+
+    }
+
 }
 
 @media (min-width: 800px){

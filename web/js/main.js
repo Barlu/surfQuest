@@ -1,5 +1,5 @@
 
-//---------------------------------ELEMENT GENERATION
+//---------------------------------ELEMENT GENERATION/GENERAL SETTINGS
 //Create beach selector
 function generateElements() {
     $('#loadingWrapper').hide();
@@ -11,6 +11,12 @@ function generateElements() {
     }
 }
 ;
+
+
+
+
+
+
 //---------------------------------UTILS
 (function () {
 
@@ -74,7 +80,7 @@ function findWindowHeight() {
 //-------------------------------MAPS
 var storage = localStorage;
 
-if(!storage.getItem('returning')){
+if (!storage.getItem('returning')) {
     window.location = "index.php?page=help";
     storage.setItem('returning', 'true');
 }
@@ -86,12 +92,20 @@ var mapModule = (function () {
     var userLatLng;
     var defaultZoom = 10;
     var request;
+    var favorites = [];
     var directionsService = new google.maps.DirectionsService();
     var directionsDisplay = new google.maps.DirectionsRenderer();
     var infoWindow = new google.maps.InfoWindow({
-        content: '<div id="infoWindow"><i class="loadingIcon fa fa-spinner fa-pulse fa-3x"></i></div>'
+        content: '<div id="infoWindow"><i class="favorite fa fa-star-o fa-3x"></i><i class="loadingIcon fa fa-spinner fa-pulse fa-3x"></i></div>'
     });
 
+    if (storage.getItem("favorites")) {
+        favorites = JSON.parse(storage.getItem("favorites"));
+        
+    }
+    ;
+    
+    console.log(favorites);
     function locateSuccess(position) {
         userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
@@ -295,8 +309,63 @@ var mapModule = (function () {
 
                 }
             }
-        }};
+        },
+        setFavorite: function (event) {
+            favorites.push(event.data.beach);
+            storage.setItem("favorites", JSON.stringify(favorites));
+            $('.favorite').off();
+            $('.favorite').removeClass("fa-star-o").addClass("fa-star");
+            $('.favorite').on("click", {beach: event.data.beach}, mapModule.removeFavorite);
+            mapModule.displayFavorites();
+        },
+        removeFavorite: function (event) {
+            if (favorites.indexOf(event.data.beach) !== -1) {
+                favorites.splice(favorites.indexOf(event.data.beach), 1);
+                $('.favorite').removeClass("fa-star").addClass("fa-star-o");
+                $('.favorite').off('click');
+                $('.favorite').on("click", {beach: event.data.beach}, mapModule.setFavorite);
+                $('.favorite').hover(
+                    function () {
+                        $(this).removeClass("fa-star-o");
+                        $(this).addClass("fa-star");
+                    },
+                    function () {
+                        $(this).removeClass("fa-star");
+                        $(this).addClass("fa-star-o");
+                    });
+                storage.setItem("favorites", JSON.stringify(favorites));
+                mapModule.displayFavorites();
+            }
+        },
+    displayFavorites: function () {
+        if (favorites.length > 0) {
+            console.log($(window).width());
+            //Check if display is for desktop or handheld
+            if ($(window).width() > 800) {
+                //If desktop, check if there is a select box already there. If so, remove and recreate
+                if ($('#favoritesSelect').length > 0) {
+                    $('#favoritesSelect').remove();
+                }
+                $('nav #favoritesLi').append('<select id="favoritesSelect" class="navSelect" onchange="mapModule.setBeach(this.options[this.selectedIndex].text)"><option>Favorites</option></select>');
+                for (var i = 0; i < favorites.length; i++) {
+                    $('#favoritesSelect').append('<option>' + favorites[i] + '</option>');
+                }
+            } else {
+                for (var i = 0; i < favorites.length; i++) {
+                    $('#favoritesContainer').append('<div class="favoriteWrap" id="' + i + '"></div>');
+                    $('#'+i).prepend("<h1>" + favorites[i] + "</h1>");
+        $("#"+i).swellmap({
+            site: favorites[i],
+            activity: "Surfing",
+            smaplink: false,
+            title: false
+        });
+                }
+            }
+        }
+    }};
 
+    
     function getNearestBeaches(start, beaches, map) {
         displayLoading();
         var sortedBeaches = [];
@@ -313,7 +382,7 @@ var mapModule = (function () {
         sortedBeaches.sort(function (a, b) {
             return a.distance - b.distance;
         });
-        console.log(sortedBeaches);
+
         var i = 0;
         (function delayedLoop(i) {
             // Loop delay is used to trottle requests and insure api query limit is not reached
@@ -398,16 +467,36 @@ var mapModule = (function () {
     }
 
     function fetchForcast(beachName) {
+        
+        if (favorites.indexOf(beachName) === -1) {
+            console.log('noFavorites');
+            $('.favorite').hover(
+                    function () {
+                        $(this).removeClass("fa-star-o");
+                        $(this).addClass("fa-star");
+                    },
+                    function () {
+                        $(this).removeClass("fa-star");
+                        $(this).addClass("fa-star-o");
+                    });
+            $('.favorite').on("click", {beach: beachName}, mapModule.setFavorite);
+        } else {
+            $('.favorite').removeClass("fa-star-o").addClass("fa-star");
+            $('.favorite').on("click", {beach: beachName}, mapModule.removeFavorite);
+        }
+        mapModule.displayFavorites();
+        $("#infoWindow").prepend("<h1>" + beachName + "</h1>");
         $("#infoWindow").swellmap({
             site: beachName,
             activity: "Surfing",
-            smaplink: false
+            smaplink: false,
+            title: false
         });
         setTimeout(function () {
             $(".loadingIcon").remove();
         }, 1000);
     }
-
+    
     function displayLoading() {
 
         var height = findWindowHeight();

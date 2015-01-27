@@ -117,7 +117,7 @@ var beaches = {
         lng: 170.703259
     },
     backBeach: {
-        name: 'Back Beach (Taranaki)',
+        name: 'Back Beach',
         spotId: 1957,
         lat: -39.068919,
         lng: 174.017840
@@ -177,7 +177,7 @@ var beaches = {
         lng: 172.928415
     },
     gizzyPipe: {
-        name: 'Gizzy Pipe (Gisborne)',
+        name: 'Gizzy Pipe',
         spotId: 110,
         lat: -34.719280,
         lng: 172.928415
@@ -291,7 +291,7 @@ var beaches = {
         lng: 167.993750
     },
     masonBay: {
-        name: 'Mason Bay - Stuart Island',
+        name: 'Mason Bay',
         spotId: 3914,
         lat: -34.719280,
         lng: 172.928415
@@ -465,7 +465,7 @@ var beaches = {
         lng: 172.928415
     },
     stClair: {
-        name: 'St Clair (Dunedin)',
+        name: 'St Clair',
         spotId: 115,
         lat: -45.913048,
         lng: 170.491314
@@ -483,7 +483,7 @@ var beaches = {
         lng: 172.928415
     },
     sumnerBar: {
-        name: 'Sumner Bar (Christchurch)',
+        name: 'Sumner Bar',
         spotId: 1950,
         lat: -43.566476,
         lng: 172.763321

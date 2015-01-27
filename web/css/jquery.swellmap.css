@@ -4,7 +4,7 @@
 
 .smap-plugin {
     font-family: Arial, Helvetica, sans-serif;
-    width: 240px;
+    width: 261px;
     height: 200px;
     position: relative;
     margin: 0 auto;
@@ -15,12 +15,12 @@
 }
 
 .smap-plugin a, .smap-plugin a:link, .smap-plugin a:visited {
-  color: #2763A5;
-  text-decoration: none;
+    color: #2763A5;
+    text-decoration: none;
 }
 
 .smap-plugin a:hover, a:focus {
-  color: #6191C5;
+    color: #6191C5;
 }
 
 
@@ -28,15 +28,20 @@
     position: absolute;
     top: 60px;
     left: 0px;
-    width: 240px;
+    width: 250px;
     height: 114px;
     color: #fff;
     border: 1px solid #c1d4f0;
-   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    background-image: url("../images/plugin-bg.png");
-    background-repeat: repeat-x;
+    background: rgb(189, 212, 222);
+    background: rgb(189, 212, 222);
+    background: -moz-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
+    background: -webkit-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
+    background: -o-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
+    background: -ms-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
+    background: linear-gradient(180deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -55,20 +60,20 @@
     left: 0px;
     font-size: 26px;
     color: #666;
-    
+
     width: 240px;
     height: 40px;
-    
+
     text-shadow: 1px 1px 0 #fff;
     background-image: url("../images/header-grey.png");
     background-repeat: repeat-x;
     background-color: #ddd;
-    
-   border: 1px solid #c1d4f0;
-   -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+
+    border: 1px solid #c1d4f0;
+    -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    
+
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -104,14 +109,14 @@
 .smap-plugin .smap-rating {
     position: absolute;
     top: 34px;
-    right: 44px;
+    right: 89px;
     z-index: 1000;
 }
 
 .smap-plugin .smap-summary {
     position: absolute;
     top: 34px;
-    right: 0px;
+    right: 44px;
     z-index: 1000;
 }
 
@@ -129,7 +134,7 @@
 }
 
 .smap-plugin .smap-wface, .smap-plugin .smap-bhs, .smap-plugin .smap-tmp2m {
-    font-size: 60px;
+    font-size: 50px;
     top: 0px;
     left: 8px;
 }
@@ -169,7 +174,7 @@
     font-size: 11px;
     top: 76px;
     left: 4px;
-    padding: 4px;
+    padding: 6px;
 }
 
 .smap-plugin .smap-desc {
@@ -178,8 +183,8 @@
 
 .smap-plugin .smap-wface .smap-desc, .smap-plugin .smap-bhs .smap-desc, .smap-plugin .smap-tmp2m .smap-desc {
     position: absolute;
-    top: 56px;
-    left: 0px;
+    top: 55px;
+    left: 5px;
     font-size: 20px;
 }
 
