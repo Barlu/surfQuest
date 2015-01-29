@@ -23,7 +23,7 @@ and open the template in the editor.
         padding-left: 5px;
         display: inline-block;
     }
-    
+
     h3 {
         margin-top: 2px;
         margin-bottom: 2px;
@@ -49,13 +49,12 @@ and open the template in the editor.
         background-image: -moz-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
         background-image: -webkit-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
         background-image: -ms-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
-
     }
 
     .highlight {
         color: #ff530d;
     }
-    
+
     .highlight:visited {
         color: #ff530d;
     }
@@ -74,6 +73,7 @@ and open the template in the editor.
         z-index: 98;
     }
 
+    
     nav.handheld {
         position: fixed;
         z-index: 99;
@@ -117,13 +117,13 @@ and open the template in the editor.
     .navSelect {
         border: none;
         outline: none;
+        background-color: #fff;
     }
 
     .citySelection {
         display: inline-block;
         padding: 2px;
         margin: auto;
-
     }
 
     .selectWrapper {
@@ -183,7 +183,7 @@ and open the template in the editor.
     img#banner {
         width: 100%;
         display: block;
-        
+
         position: relative;
         z-index: 97;
     }
@@ -258,23 +258,31 @@ and open the template in the editor.
         justify-content: space-around;
         padding: 30px;
     }
-    
+
     div.favoriteWrap {
         width: 270px;
         height: 190px;
         line-height: 1.35;
         overflow: hidden;
-        
-
     }
-    
+
     div.favoriteWrap h1 {
         font-size: 1.6em;
     }
-    
+
     div.favoriteWrap i {
         font-size: 2.5em;
     }
+
+    article#help {
+        padding-top: 40px;
+        padding-left:40px;
+        padding-right:40px;
+        padding-bottom: 100px;
+        
+    }
+    
+  
 }
 
 
@@ -298,8 +306,8 @@ and open the template in the editor.
     nav.handheld ul li:nth-child(2) {
         font-size: 1.4em;
     }
-    
-    
+
+
 }
 
 @media (min-width: 376px) and (max-width: 600px){
@@ -319,12 +327,6 @@ and open the template in the editor.
     }
     nav.handheld ul li:nth-child(2) {
         font-size: 1.9em;
-    }
-    
-    
-    
-    article#help {
-        margin: 30px;
     }
 }
 
@@ -347,7 +349,7 @@ and open the template in the editor.
         font-size: 2.3em;
 
     }
-    
+
 
 }
 
@@ -367,8 +369,8 @@ and open the template in the editor.
     div.selectWrapper{
         display: none;
     }
-    
-    
+
+
 }
 
 
