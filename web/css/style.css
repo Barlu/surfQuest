@@ -23,9 +23,16 @@ and open the template in the editor.
         padding-left: 5px;
         display: inline-block;
     }
+    
+    h3 {
+        margin-top: 2px;
+        margin-bottom: 2px;
+        font-size: .3em;
 
+    }
     body {
         font-family:Lucida Sans, 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
+
         color: #3f5765;
 
     }
@@ -46,6 +53,10 @@ and open the template in the editor.
     }
 
     .highlight {
+        color: #ff530d;
+    }
+    
+    .highlight:visited {
         color: #ff530d;
     }
 
@@ -90,6 +101,8 @@ and open the template in the editor.
         background-color: rgba(255,255,255,.8);
         margin-top: 5px;
         margin-bottom: 5px;
+        padding-top: 5px;
+        padding-bottom: 5px;
 
     }
 
@@ -170,6 +183,9 @@ and open the template in the editor.
     img#banner {
         width: 100%;
         display: block;
+        
+        position: relative;
+        z-index: 97;
     }
 
     /*---------------------------------------LOADING ICON*/
@@ -240,11 +256,24 @@ and open the template in the editor.
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
+        padding: 30px;
     }
     
-    .favoriteWrap {
-        width: 265px;
+    div.favoriteWrap {
+        width: 270px;
         height: 190px;
+        line-height: 1.35;
+        overflow: hidden;
+        
+
+    }
+    
+    div.favoriteWrap h1 {
+        font-size: 1.6em;
+    }
+    
+    div.favoriteWrap i {
+        font-size: 2.5em;
     }
 }
 
@@ -253,6 +282,9 @@ and open the template in the editor.
 @media (max-width: 375px){
     img#banner {
         content: url(../images/mobileBanner.jpg);
+        -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
     }
     nav.desktop {
         display: none;
@@ -266,11 +298,16 @@ and open the template in the editor.
     nav.handheld ul li:nth-child(2) {
         font-size: 1.4em;
     }
+    
+    
 }
 
 @media (min-width: 376px) and (max-width: 600px){
     img#banner {
         content: url(../images/tabletBanner-Portrait.jpg);
+        -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
     }
     nav.desktop {
         display: none;
@@ -283,11 +320,20 @@ and open the template in the editor.
     nav.handheld ul li:nth-child(2) {
         font-size: 1.9em;
     }
+    
+    
+    
+    article#help {
+        margin: 30px;
+    }
 }
 
 @media (min-width: 600px) and (max-width: 800px){
     img#banner {
         content: url(../images/tabletBanner-Landscape.jpg);
+        -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        -moz-box-shadow:    1px 1px 6px 0px rgba(50, 50, 50, 0.75);
+        box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
     }
     nav.desktop {
         display: none;
@@ -301,6 +347,7 @@ and open the template in the editor.
         font-size: 2.3em;
 
     }
+    
 
 }
 
@@ -320,6 +367,8 @@ and open the template in the editor.
     div.selectWrapper{
         display: none;
     }
+    
+    
 }
 
 

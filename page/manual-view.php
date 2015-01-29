@@ -18,5 +18,10 @@
         <div class="rect5"></div>
     </div>
 </div>
-<script>mapModule.setMap();</script>
+<script>
+if(storage.getItem('favoriteBeach')){
+    mapModule.runAutoLocate();
+}else{
+    mapModule.setMap();
+}</script>
 

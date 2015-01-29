@@ -4,7 +4,6 @@
     </select>
 </div>
 <div id="map-canvas"></div>
-
 <div id='loadingWrapper'>
     
     <div class="spinner centered">
@@ -19,6 +18,7 @@
 
 <script>
     mapModule.runAutoLocate();
+
 </script>
 <!--<div id="directions-panel"></div>-->
 <!--<div id="forcast"></div>-->

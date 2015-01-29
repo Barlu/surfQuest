@@ -12,10 +12,12 @@
         <link rel="stylesheet" href="css/style.css"/>
         <link rel="stylesheet" href="css/jquery.swellmap.css"/>
         <link rel="stylesheet" href="font-awesome-4.3.0/css/font-awesome.min.css"/>
+        <link rel="stylesheet" href="css/hint.min.css">
         <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
         <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfbWr8FgN2JgQIDC6go0BfffsrbBZN5Rg&sensor=true&libraries=geometry"></script> 
         <script type="text/javascript" src="js/data.js"></script>
         <script type="text/javascript" src="js/main.js"></script>
+        
 
 
         <script type="text/javascript" src="js/jquery.swellmap.js"></script>
@@ -53,27 +55,32 @@
                 <nav class="handheld">
                     <ul>
                         <li>
-                            <a href="index.php?page=home">
-                                <i class='fa fa-location-arrow <?php echo $locate; ?>'></i>
+                            <a href="index.php?page=home" class="<?php echo $locate; ?>">
+                                <i class='fa fa-location-arrow '></i>
+                                <h3 class="tooltip">Locate</h3>
+                            </a>
+                        </li>
+                        <li >
+                            <a href="index.php?page=manual" class="<?php echo $search; ?>">
+                                <i class="fa fa-search "></i>
+                                <h3 class="tooltip">Search</h3>
                             </a>
                         </li>
                         <li>
-                            <a href="index.php?page=manual">
-                                <i class="fa fa-search <?php echo $search; ?>"></i>
+                            <a href="index.php?page=favorites" class="<?php echo $favorites; ?>">
+                                <i class="fa fa-star-o "></i>
+                                <h3 class="tooltip">Favorites</h3>
                             </a>
                         </li>
                         <li>
-                            <a href="index.php?page=favorites">
-                                <i class="fa fa-star-o <?php echo $favorites; ?>"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="index.php?page=help">
-                                <i class="fa fa-question <?php echo $help; ?>"></i>
+                            <a href="index.php?page=help" class="<?php echo $help; ?>">
+                                <i class="fa fa-question "></i>
+                                <h3 class="tooltip">Help</h3>
                             </a>
                         </li>
                     </ul>
                 </nav>
+                
             </div>
         </div>
     </body>

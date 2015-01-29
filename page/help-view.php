@@ -1,4 +1,4 @@
-<article>
+<article id="help">
     <h1>Welcome SurfQuesters!</h1>
     <p>You've just arrived at the self-appointed, best website ever. As intelligent as I am humble, let me explain what its all about and how this cant make your life 1000 times better.</p>
     <p>Basically, through the forbidden arts of black magic, I am able to magically locate your position and then show you were the closest places to get your feet wet are! Now, obviously, black magic only works well on handheld devices but fear not! I've given you the ability to manually select where you  are (or where you wanna be) just incase its way off.</p>
@@ -12,4 +12,5 @@
     </ol>
     <p>Whew! Hope that wasn't too much for your wee brains to handle. Just click below to get started!</p>
 </article>
+
 

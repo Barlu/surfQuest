@@ -18,7 +18,7 @@ function generateElements() {
 
 
 //---------------------------------UTILS
-(function () {
+(function() {
 
 //    /**
 //     * Decimal adjustment of a number.
@@ -49,19 +49,19 @@ function generateElements() {
 
 //     Decimal round
     if (!Math.round10) {
-        Math.round10 = function (value, exp) {
+        Math.round10 = function(value, exp) {
             return decimalAdjust('round', value, exp);
         };
     }
 //     Decimal floor
     if (!Math.floor10) {
-        Math.floor10 = function (value, exp) {
+        Math.floor10 = function(value, exp) {
             return decimalAdjust('floor', value, exp);
         };
     }
 //     Decimal ceil
     if (!Math.ceil10) {
-        Math.ceil10 = function (value, exp) {
+        Math.ceil10 = function(value, exp) {
             return decimalAdjust('ceil', value, exp);
         };
     }
@@ -86,7 +86,7 @@ if (!storage.getItem('returning')) {
 }
 //----------START CLOSURE
 // Closure created to contain semi-global variables relevant to MAPS functions
-var mapModule = (function () {
+var mapModule = (function() {
 
     var map;
     var userLatLng;
@@ -99,18 +99,17 @@ var mapModule = (function () {
         content: '<div id="infoWindow"><i class="favorite fa fa-star-o fa-3x"></i><i class="loadingIcon fa fa-spinner fa-pulse fa-3x"></i></div>'
     });
 
+
     if (storage.getItem("favorites")) {
         favorites = JSON.parse(storage.getItem("favorites"));
-        
     }
     ;
-    
+
+
     console.log(favorites);
     function locateSuccess(position) {
-        userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-//    storage.setItem('userLat', position.coords.latitude);
-//    storage.setItem('userLng', position.coords.latitude);
+        userLatLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
         var mapOptions = {
             center: userLatLng,
@@ -120,7 +119,10 @@ var mapModule = (function () {
         map = new google.maps.Map(document.getElementById('map-canvas'),
                 mapOptions);
 
-
+        directionsDisplay.setMap(map);
+        directionsDisplay.setPanel(document.getElementById('directions-panel'));
+        directionsDisplay.setOptions({suppressMarkers: true});
+        
         new google.maps.Marker({
             map: map,
             position: userLatLng,
@@ -135,8 +137,11 @@ var mapModule = (function () {
 
 
         activateSonar(map, userLatLng, defaultZoom);
-        getNearestBeaches(userLatLng, beaches, map);
-
+        if (storage.getItem("favoriteBeach")) {
+            mapModule.setBeach(storage.getItem("favoriteBeach"));
+        } else {
+            getNearestBeaches(userLatLng, beaches, map);
+        }
 
     }
 
@@ -172,7 +177,7 @@ var mapModule = (function () {
 
         //Adds listener to map so that when zoomed in or out the size
         //of the radius is change by a factor of 2
-        google.maps.event.addListener(map, 'zoom_changed', function () {
+        google.maps.event.addListener(map, 'zoom_changed', function() {
             var zoom = map.getZoom();
             var diff = (zoom - lastZoom);
 
@@ -219,7 +224,7 @@ var mapModule = (function () {
             });
 
             var opacity = 1;
-            var sonarAnimation = setInterval(function () {
+            var sonarAnimation = setInterval(function() {
                 var radius = sonar.getRadius();
                 if ((radius > rMax)) {
                     sonar.setMap(null);
@@ -243,7 +248,7 @@ var mapModule = (function () {
     //The two functions that need to be accessed publicly have been returned from the closure
     //as an object
     return {
-        runAutoLocate: function () {
+        runAutoLocate: function() {
             if (navigator.geolocation) {
                 var geoOptions = {
                     enableHighAccuracy: true
@@ -252,10 +257,13 @@ var mapModule = (function () {
                 navigator.geolocation.getCurrentPosition(locateSuccess, locateFail, geoOptions);
 
             } else {
+                if (storage.getItem("favoriteBeach")) {
+                    getBeach(storage.getItem("favoriteBeach"));
+                }
                 alert('I\'m sorry, but Geolocation is not supported in your current browser.');
             }
         },
-        setMap: function (mapOptions) {
+        setMap: function(mapOptions) {
             if (!mapOptions) {
                 var latLng = new google.maps.LatLng(-41.477078, 172.993614);
                 mapOptions = {
@@ -267,7 +275,7 @@ var mapModule = (function () {
                     mapOptions);
             $('#loadingWrapper').hide();
         },
-        setLocation: function (name) {
+        setLocation: function(name) {
             for (var i = 0; i < cities.length; i++) {
                 if (cities[i].city === name) {
                     var position = {
@@ -280,7 +288,7 @@ var mapModule = (function () {
                 }
             }
         },
-        setBeach: function (name) {
+        setBeach: function(name) {
             displayLoading();
             for (var beach in beaches) {
                 if (beaches[beach].name === name) {
@@ -292,13 +300,14 @@ var mapModule = (function () {
                         map: map,
                         title: name
                     });
+                    console.log(userLatLng);
                     request = {
                         origin: userLatLng,
                         destination: marker.position,
                         travelMode: google.maps.TravelMode.DRIVING
                     };
 
-                    directionsService.route(request, function (result, status) {
+                    directionsService.route(request, function(result, status) {
                         if (status === google.maps.DirectionsStatus.OK) {
                             directionsDisplay.setDirections(result);
                         }
@@ -310,7 +319,7 @@ var mapModule = (function () {
                 }
             }
         },
-        setFavorite: function (event) {
+        setFavorite: function(event) {
             favorites.push(event.data.beach);
             storage.setItem("favorites", JSON.stringify(favorites));
             $('.favorite').off();
@@ -318,54 +327,64 @@ var mapModule = (function () {
             $('.favorite').on("click", {beach: event.data.beach}, mapModule.removeFavorite);
             mapModule.displayFavorites();
         },
-        removeFavorite: function (event) {
+        removeFavorite: function(event) {
             if (favorites.indexOf(event.data.beach) !== -1) {
                 favorites.splice(favorites.indexOf(event.data.beach), 1);
                 $('.favorite').removeClass("fa-star").addClass("fa-star-o");
                 $('.favorite').off('click');
                 $('.favorite').on("click", {beach: event.data.beach}, mapModule.setFavorite);
                 $('.favorite').hover(
-                    function () {
-                        $(this).removeClass("fa-star-o");
-                        $(this).addClass("fa-star");
-                    },
-                    function () {
-                        $(this).removeClass("fa-star");
-                        $(this).addClass("fa-star-o");
-                    });
+                        function() {
+                            $(this).removeClass("fa-star-o");
+                            $(this).addClass("fa-star");
+                        },
+                        function() {
+                            $(this).removeClass("fa-star");
+                            $(this).addClass("fa-star-o");
+                        });
                 storage.setItem("favorites", JSON.stringify(favorites));
                 mapModule.displayFavorites();
             }
         },
-    displayFavorites: function () {
-        if (favorites.length > 0) {
-            console.log($(window).width());
-            //Check if display is for desktop or handheld
-            if ($(window).width() > 800) {
-                //If desktop, check if there is a select box already there. If so, remove and recreate
-                if ($('#favoritesSelect').length > 0) {
-                    $('#favoritesSelect').remove();
-                }
-                $('nav #favoritesLi').append('<select id="favoritesSelect" class="navSelect" onchange="mapModule.setBeach(this.options[this.selectedIndex].text)"><option>Favorites</option></select>');
-                for (var i = 0; i < favorites.length; i++) {
-                    $('#favoritesSelect').append('<option>' + favorites[i] + '</option>');
-                }
-            } else {
-                for (var i = 0; i < favorites.length; i++) {
-                    $('#favoritesContainer').append('<div class="favoriteWrap" id="' + i + '"></div>');
-                    $('#'+i).prepend("<h1>" + favorites[i] + "</h1>");
-        $("#"+i).swellmap({
-            site: favorites[i],
-            activity: "Surfing",
-            smaplink: false,
-            title: false
-        });
+        tempStoreFavorite: function(event) {
+            storage.setItem("favoriteBeach", event.data.beach);
+        },
+        displayFavorites: function() {
+            if (favorites.length > 0) {
+                console.log($(window).width());
+                //Check if display is for desktop or handheld
+                if ($(window).width() > 800) {
+                    //If desktop, check if there is a select box already there. If so, remove and recreate
+                    if ($('#favoritesSelect').length > 0) {
+                        $('#favoritesSelect').remove();
+                    }
+                    $('nav #favoritesLi').append('<select id="favoritesSelect" class="navSelect" onchange="mapModule.setBeach(this.options[this.selectedIndex].text)"><option>Favorites</option></select>');
+                    for (var i = 0; i < favorites.length; i++) {
+                        $('#favoritesSelect').append('<option>' + favorites[i] + '</option>');
+                    }
+                } else {
+                    if ($('.flexContainer').height() < $(window).height()) {
+                        $('.flexContainer').height($(window).height());
+                    }
+                    $('.favoriteWrap').remove();
+                    $('#noFavorites').remove();
+                    for (var i = 0; i < favorites.length; i++) {
+                        $('#favoritesContainer').append('<div class="favoriteWrap" id="' + i + '"></div>');
+                        $('#' + i).prepend("<a href=index.php?page=manual><h1>" + favorites[i] + "</h1></a><i class='favorite fa fa-star fa-3x'></i>");
+                        $('#' + i + ' h1').on('click', {beach: favorites[i]}, mapModule.tempStoreFavorite);
+                        $('div#' + i + ' .favorite').on("click", {beach: favorites[i], favoritesPage: true}, mapModule.removeFavorite);
+                        $("#" + i).swellmap({
+                            site: favorites[i],
+                            activity: "Surfing",
+                            smaplink: false,
+                            title: false
+                        });
+                    }
                 }
             }
-        }
-    }};
+        }};
 
-    
+
     function getNearestBeaches(start, beaches, map) {
         displayLoading();
         var sortedBeaches = [];
@@ -379,14 +398,14 @@ var mapModule = (function () {
             });
         }
 
-        sortedBeaches.sort(function (a, b) {
+        sortedBeaches.sort(function(a, b) {
             return a.distance - b.distance;
         });
 
         var i = 0;
         (function delayedLoop(i) {
             // Loop delay is used to trottle requests and insure api query limit is not reached
-            setTimeout(function () {
+            setTimeout(function() {
                 var destination = new google.maps.LatLng(sortedBeaches[i].beach.lat, sortedBeaches[i].beach.lng);
                 request = {
                     origin: start,
@@ -395,7 +414,7 @@ var mapModule = (function () {
                 };
 
 
-                obtainAndDisplay(request, i, function () {
+                obtainAndDisplay(request, i, function() {
 
                     results.sort(compareDistanceGoogle);
                     for (var j = 4; j > -1; j--) {
@@ -409,9 +428,6 @@ var mapModule = (function () {
                             title: beachName
                         });
                         if (j === 0) {
-                            directionsDisplay.setMap(map);
-                            directionsDisplay.setPanel(document.getElementById('directions-panel'));
-                            directionsDisplay.setOptions({suppressMarkers: true});
                             directionsDisplay.setDirections(results[j].result);
                             $('#loadingWrapper').hide();
                             infoWindow.open(map, marker);
@@ -431,7 +447,7 @@ var mapModule = (function () {
                                 travelMode: google.maps.TravelMode.DRIVING
                             };
 
-                            directionsService.route(request, function (result, status) {
+                            directionsService.route(request, function(result, status) {
                                 if (status === google.maps.DirectionsStatus.OK) {
                                     directionsDisplay.setDirections(result);
                                 }
@@ -452,7 +468,7 @@ var mapModule = (function () {
         })(i);
 
         function obtainAndDisplay(request, i, fn) {
-            directionsService.route(request, function (result, status) {
+            directionsService.route(request, function(result, status) {
                 if (status === google.maps.DirectionsStatus.OK) {
                     results.push({
                         result: result,
@@ -467,15 +483,15 @@ var mapModule = (function () {
     }
 
     function fetchForcast(beachName) {
-        
+
         if (favorites.indexOf(beachName) === -1) {
             console.log('noFavorites');
             $('.favorite').hover(
-                    function () {
+                    function() {
                         $(this).removeClass("fa-star-o");
                         $(this).addClass("fa-star");
                     },
-                    function () {
+                    function() {
                         $(this).removeClass("fa-star");
                         $(this).addClass("fa-star-o");
                     });
@@ -492,11 +508,11 @@ var mapModule = (function () {
             smaplink: false,
             title: false
         });
-        setTimeout(function () {
+        setTimeout(function() {
             $(".loadingIcon").remove();
         }, 1000);
     }
-    
+
     function displayLoading() {
 
         var height = findWindowHeight();
@@ -527,6 +543,12 @@ function deg2rad(deg) {
 
 function compareDistanceGoogle(a, b) {
     return a.result.routes[0].legs[0].distance.value - b.result.routes[0].legs[0].distance.value;
+}
+
+function addHelpTooltips() {
+    console.log('here');
+    $('nav.handheld i').addClass('hint--top hint--always');
+    $('nav.handheld i').attr('data-hint', 'This is the Auto-Locate key. It will find your position and the nearest beaches to you.');
 }
 
 
