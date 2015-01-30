@@ -80,6 +80,9 @@
                 </nav>
 
             </div>
+            <footer>
+                <img src="images/desktopFooter.jpg">
+            </footer>
         </div>
     </body>
 </html>

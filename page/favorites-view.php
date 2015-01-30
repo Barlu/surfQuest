@@ -3,5 +3,4 @@
 </div>
 <script>
 mapModule.displayFavorites();
-
 </script>

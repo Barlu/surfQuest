@@ -11,10 +11,10 @@ and open the template in the editor.
     /*--------------------------------GENERAL*/
     a {
         text-decoration: none;
-        color: #3f5765;
+        color: #2F4957;
     }
     a:visited {
-        color: #3f5765;
+        color: #2F4957;
     }
 
     h1 {
@@ -32,13 +32,11 @@ and open the template in the editor.
     }
     body {
         font-family:Lucida Sans, 'Lucida Grande', 'Lucida Sans Unicode', sans-serif;
-
-        color: #3f5765;
-
+        color: #2F4957;
     }
 
     div#wrapper {
-        max-width: 960px;
+        max-width: 1280px;
         margin: auto;
         -webkit-box-shadow: 1px 1px 16px 3px rgba(0,0,0,0.75);
         -moz-box-shadow: 1px 1px 16px 3px rgba(0,0,0,0.75);
@@ -46,9 +44,12 @@ and open the template in the editor.
     }
 
     #contentWrapper {
-        background-image: -moz-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
-        background-image: -webkit-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
-        background-image: -ms-linear-gradient( -90deg,  rgb(189,212,222) 0%, rgb(239,239,239) 27%, rgb(239,239,239) 68%, rgb(214,226,231) 90%, rgb(189,212,222) 100%);
+        background: #778891; /* Old browsers */
+        background: -moz-linear-gradient(10deg,  #778891 0%, #768790 16%, #768790 49%, #4e6570 62%, #2f4957 88%, #2f4957 88%); /* FF3.6+ */
+        background: -webkit-linear-gradient(10deg,  #778891 0%,#768790 16%,#768790 49%,#4e6570 62%,#2f4957 88%,#2f4957 88%); /* Chrome10+,Safari5.1+ */
+        background: -o-linear-gradient(10deg,  #778891 0%,#768790 16%,#768790 49%,#4e6570 62%,#2f4957 88%,#2f4957 88%); /* Opera 11.10+ */
+        background: -ms-linear-gradient(10deg,  #778891 0%,#768790 16%,#768790 49%,#4e6570 62%,#2f4957 88%,#2f4957 88%); /* IE10+ */
+        background: linear-gradient(10deg,  #778891 0%,#768790 16%,#768790 49%,#4e6570 62%,#2f4957 88%,#2f4957 88%); /* W3C */
     }
 
     .highlight {
@@ -73,7 +74,7 @@ and open the template in the editor.
         z-index: 98;
     }
 
-    
+
     nav.handheld {
         position: fixed;
         z-index: 99;
@@ -199,7 +200,7 @@ and open the template in the editor.
     }
 
     .spinner > div {
-        background-color: #3f5765;
+        background-color: #2F4957;
         height: 100%;
         width: 6px;
         display: inline-block;
@@ -257,6 +258,7 @@ and open the template in the editor.
         flex-wrap: wrap;
         justify-content: space-around;
         padding: 30px;
+        background-color: rgba(255, 255, 255, .9);
     }
 
     div.favoriteWrap {
@@ -264,6 +266,8 @@ and open the template in the editor.
         height: 190px;
         line-height: 1.35;
         overflow: hidden;
+        
+            margin: 10px;
     }
 
     div.favoriteWrap h1 {
@@ -279,15 +283,22 @@ and open the template in the editor.
         padding-left:40px;
         padding-right:40px;
         padding-bottom: 100px;
+        color: #fff;
         
+
     }
-    
-  
+
+    footer {
+        display: none;
+        border-top: solid #fff;
+    }
+
+
 }
 
 
 
-@media (max-width: 375px){
+@media (max-width: 450px){
     img#banner {
         content: url(../images/mobileBanner.jpg);
         -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
@@ -310,7 +321,7 @@ and open the template in the editor.
 
 }
 
-@media (min-width: 376px) and (max-width: 600px){
+@media (min-width: 450px) and (max-width: 700px){
     img#banner {
         content: url(../images/tabletBanner-Portrait.jpg);
         -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
@@ -330,7 +341,7 @@ and open the template in the editor.
     }
 }
 
-@media (min-width: 600px) and (max-width: 800px){
+@media (min-width: 700px) and (max-width: 1024px){
     img#banner {
         content: url(../images/tabletBanner-Landscape.jpg);
         -webkit-box-shadow: 1px 1px 6px 0px rgba(50, 50, 50, 0.75);
@@ -353,7 +364,7 @@ and open the template in the editor.
 
 }
 
-@media (min-width: 800px){
+@media (min-width: 1024px){
     img#banner {
         content: url(../images/desktopBanner.jpg);
     }
@@ -363,18 +374,23 @@ and open the template in the editor.
     }
 
     #contentWrapper{
-        padding: 40px;
+        padding-top: 60px;
+        padding-bottom: 80px;
+        padding-left: 40px;
+        padding-right: 40px;
     }
 
     div.selectWrapper{
         display: none;
     }
 
+    footer {
+        display: block;
+    }
 
+    #map-canvas {
+        height: 800px;
+    }
 }
 
 
-
-@media print {
-
-}

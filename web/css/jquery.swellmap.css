@@ -37,11 +37,11 @@
     -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     background: rgb(189, 212, 222);
     background: rgb(189, 212, 222);
-    background: -moz-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
-    background: -webkit-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
-    background: -o-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
-    background: -ms-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
-    background: linear-gradient(180deg, rgb(189, 212, 222) 2%, rgb(63, 87, 101) 96%);
+    background: -moz-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(47, 73, 87) 96%);
+    background: -webkit-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(47, 73, 87) 96%);
+    background: -o-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(47, 73, 87) 96%);
+    background: -ms-linear-gradient(90deg, rgb(189, 212, 222) 2%, rgb(47, 73, 87) 96%);
+    background: linear-gradient(180deg, rgb(189, 212, 222) 2%, rgb(47, 73, 87) 96%);
     border-radius: 6px;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
